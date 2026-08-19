@@ -4,9 +4,9 @@ import importlib
 import reports.blood_report as blood_report
 import reports.medical_prescription as prescription
 import reports.ultrasound as ultrasound
-import reports.xray_report as x_ray_report
-import reports.ct_scan as ct_scan
-import reports.mri_report as mri_report
+import reports.Xray_report as x_ray_report
+import reports.CT_SCAN as ct_scan
+import reports.MRI_report as mri_report
 import reports.other as other
 
 importlib.reload(blood_report)
