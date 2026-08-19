@@ -5,8 +5,8 @@ import reports.blood_report as blood_report
 import reports.medical_prescription as prescription
 import reports.ultrasound as ultrasound
 import reports.Xray_report as Xray_report
-import reports.CT_SCAN as ct_scan
-import reports.MRI_report as mri_report
+import reports.CT_SCAN as CT_SCAN
+import reports.MRI_report as MRI_reports
 import reports.other as other
 
 importlib.reload(blood_report)
@@ -15,6 +15,7 @@ importlib.reload(Xray_report)
 importlib.reload(CT_SCAN)
 importlib.reload(MRI_reports)
 importlib.reload(other)
+importlib.reload(ultrasound)
 
 st.title("Medical Report Explainer", text_alignment='center')
 
