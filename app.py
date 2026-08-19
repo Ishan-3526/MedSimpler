@@ -3,10 +3,10 @@ import streamlit as st
 import importlib
 import reports.blood_report as blood_report
 import reports.Medical_prescription as prescription
-from reports import X_ray_report
-from reports import CT_SCAN
-from reports import MRI_reports
-from reports import other
+from reports.X-ray_report import X_ray_report
+from reports.CT_SCAN import CT_SCAN
+from reports.MRI_reports import MRI_reports
+from reports.other import other
 
 importlib.reload(blood_report)
 importlib.reload(prescription)
