@@ -3,9 +3,17 @@ import streamlit as st
 import importlib
 import agents.project.reports.blood_report as blood_report
 import agents.project.reports.Medical_prescription as prescription
+from agents.project.reports import X_ray_report
+from agents.project.reports import CT_SCAN
+from agents.project.reports import MRI_reports
+from agents.project.reports import other
 
 importlib.reload(blood_report)
 importlib.reload(prescription)
+importlib.reload(X_ray_report)
+importlib.reload(CT_SCAN)
+importlib.reload(MRI_reports)
+importlib.reload(other)
 
 st.title("Medical Report Explainer", text_alignment='center')
 
