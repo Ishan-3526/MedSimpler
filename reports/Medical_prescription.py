@@ -1,4 +1,4 @@
-from agents.project.gemini_client import client
+from gemini_client import client
 from pydantic import BaseModel
 from typing import List
 from google.genai import types
