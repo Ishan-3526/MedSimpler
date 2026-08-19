@@ -6,7 +6,7 @@ import reports.medical_prescription as prescription
 import reports.ultrasound as ultrasound
 import reports.Xray_report as Xray_report
 import reports.CT_SCAN as CT_SCAN
-import reports.MRI_report as MRI_reports
+import reports.MRI_reports as MRI_reports
 import reports.other as other
 
 importlib.reload(blood_report)
@@ -23,7 +23,7 @@ file = st.file_uploader(
     "Upload 1 File Only (BETA MODE 🙃)",
     type=["pdf", "png", "jpg", "jpeg", "webp"]
 )
-doc_type = st.selectbox("Which Medical Report IS Uploaded. ", ["Medicine Prescription", "Blood Report", "Lab Report", "Ultrasound Report", "X-Ray Report", "CT Scan Report", "MRI Report","Other"], index=0)
+doc_type = st.selectbox("Which Medical Report IS Uploaded. ", ["Medicine Prescription", "Blood Report", "Ultrasound Report", "X-Ray Report", "CT Scan Report", "MRI Report","Other"], index=0)
 difficulty = st.selectbox("Which Difficulty You Preffer. ", ["Ekdam Basic", "Intermidiate", "Advance"], index=0)
 language = st.selectbox("Preffered Language ", ("English", "Marathi", "Hindi"), index=0)
 
