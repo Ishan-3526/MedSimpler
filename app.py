@@ -4,7 +4,7 @@ import importlib
 import reports.blood_report as blood_report
 import reports.medical_prescription as prescription
 import reports.ultrasound as ultrasound
-import reports.xray_report as xray_report
+import reports.xray_report as x_ray_report
 import reports.ct_scan as ct_scan
 import reports.mri_report as mri_report
 import reports.other as other
