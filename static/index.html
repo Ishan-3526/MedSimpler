@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MedSimpler · Medical reports in plain language</title>
+  <meta name="description"
+    content="Upload a medical report and get a clear, structured explanation in English, Hindi or Marathi." />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f766e'/%3E%3Cpath d='M26 14h12v12h12v12H38v12H26V38H14V26h12z' fill='white'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" />
+          </svg>
+        </span>
+        <span class="brand__name">MedSimpler</span>
+      </div>
+      <span class="beta">Beta</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- LEFT: input -->
+    <section class="panel" aria-labelledby="title">
+      <h1 id="title">Understand your medical report</h1>
+      <p class="lede">Upload a report and get a clear, structured explanation in everyday language.</p>
+
+      <form id="form" novalidate>
+        <div class="field">
+          <span class="label">Report file</span>
+          <label class="drop" id="drop" for="file">
+            <input id="file" name="file" type="file"
+              accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp" />
+            <div class="drop__empty" id="dropEmpty">
+              <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+                <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+              </svg>
+              <strong>Drop a file here, or click to browse</strong>
+              <small>PDF, PNG, JPG or WEBP · one file · up to 15 MB</small>
+            </div>
+            <div class="drop__file" id="dropFile" hidden>
+              <div class="thumb" id="thumb"></div>
+              <div class="fileinfo">
+                <span class="fileinfo__name" id="fileName"></span>
+                <span class="fileinfo__size" id="fileSize"></span>
+              </div>
+              <button type="button" class="iconbtn" id="removeFile" aria-label="Remove file">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    d="M6 6l12 12M18 6L6 18" />
+                </svg>
+              </button>
+            </div>
+          </label>
+          <div class="camrow">
+            <span>or</span>
+            <button type="button" class="ghost" id="cameraBtn">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+                <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 8a2 2 0 0 1 2-2h1.5l1.2-1.6A1 1 0 0 1 9.5 4h5a1 1 0 0 1 .8.4L16.5 6H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM12 16.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+              </svg>
+              Take a photo
+            </button>
+          </div>
+          <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden />
+          <p class="field__error" id="fileError" role="alert" hidden></p>
+        </div>
+
+        <div class="field">
+          <label class="label" for="docType">Report type</label>
+          <div class="select">
+            <select id="docType" name="doc_type">
+              <option>Medicine Prescription</option>
+              <option>Blood Report</option>
+              <option>Lab Report</option>
+              <option>Ultrasound Report</option>
+              <option>X-Ray Report</option>
+              <option>CT Scan Report</option>
+              <option>MRI Report</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="field">
+          <legend class="label">Explanation level</legend>
+          <div class="seg" role="radiogroup">
+            <label><input type="radio" name="difficulty" value="Ekdam Basic" checked /><span>Basic</span></label>
+            <label><input type="radio" name="difficulty" value="Intermidiate" /><span>Intermediate</span></label>
+            <label><input type="radio" name="difficulty" value="Advance" /><span>Advanced</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend class="label">Language</legend>
+          <div class="seg" role="radiogroup">
+            <label><input type="radio" name="language" value="English" checked /><span>English</span></label>
+            <label><input type="radio" name="language" value="Hindi" /><span>हिन्दी</span></label>
+            <label><input type="radio" name="language" value="Marathi" /><span>मराठी</span></label>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn" id="submitBtn">
+          <span class="btn__label">Analyse report</span>
+          <span class="btn__spinner" aria-hidden="true"></span>
+        </button>
+        <p class="privacy">Your file is sent to Google Gemini to generate the explanation. This app does not store it.
+        </p>
+      </form>
+    </section>
+
+    <!-- RIGHT: results -->
+    <section class="results" id="results" aria-live="polite" aria-busy="false">
+      <div class="empty" id="empty">
+        <div class="empty__art" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <rect x="12" y="6" width="40" height="52" rx="6" fill="none" stroke="currentColor" stroke-width="2.5" />
+            <path d="M22 20h20M22 29h20M22 38h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+          </svg>
+        </div>
+        <h2>Your explanation will appear here</h2>
+        <p>Choose a report, pick how detailed you want it, and press <b>Analyse report</b>.</p>
+      </div>
+      <div id="output"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><strong>Not medical advice.</strong> MedSimpler explains what is written in your report using AI, and it can make
+      mistakes. Always check results with your doctor before making any health decision.</p>
+  </footer>
+
+  <!-- Camera (desktop webcam preview; phones use the native camera app) -->
+  <div class="camera" id="camera" hidden role="dialog" aria-modal="true" aria-label="Take a photo">
+    <div class="camera__box">
+      <div class="camera__stage">
+        <video id="camVideo" autoplay playsinline muted></video>
+        <img id="camShot" alt="Captured photo preview" hidden />
+      </div>
+      <p class="camera__msg" id="camMsg" role="alert" hidden></p>
+      <div class="camera__bar">
+        <button type="button" class="ghost" id="camCancel">Cancel</button>
+        <button type="button" class="btn btn--auto" id="camCapture">Capture</button>
+        <button type="button" class="ghost" id="camRetake" hidden>Retake</button>
+        <button type="button" class="btn btn--auto" id="camUse" hidden>Use photo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+
+</html>
